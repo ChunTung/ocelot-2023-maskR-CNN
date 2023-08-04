@@ -7,6 +7,8 @@ from util.constants import (
 )
 from user.inference import Model
 import pdb
+import time
+
 
 def process():
     """Process a test patches. This involves iterating over samples,
@@ -24,8 +26,8 @@ def process():
 
     # Instantiate the inferring model
     model = Model(meta_dataset)
-    print(model)
-    model_weight = '/media/xuan/Transcend/OCELOT/mrcnn/samples/test/mask_rcnn_nucleus_0095.h5'
+    # print(model)
+    model_weight = './mask_rcnn_nucleus_0095.h5'
 
     # NOTE: Batch size is 1
     for cell_patch, tissue_patch, pair_id in loader:
@@ -36,7 +38,7 @@ def process():
         cell_classification = model(cell_patch, tissue_patch, pair_id,model_weight)
         
         # Updating predictions
-        pdb.set_trace()
+        # pdb.set_trace()
         writer.add_points(cell_classification, pair_id)
 
     # Export the prediction into a json file
@@ -44,5 +46,7 @@ def process():
 
 
 if __name__ == "__main__":
+    # start = time.time()
     process()
-
+    # end = time.time()
+    # print(end-start)

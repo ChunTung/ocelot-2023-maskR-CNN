@@ -71,29 +71,29 @@ def overlap_preposes(input_):
 
 
 def th_overlap_preposes(result,size):
-    result_size = len(result)//8
-    pool = multiprocessing.Pool(processes= 8)
-    start = len(result)
-    print('start = ' +  str(start))
-    print(len(result[0::8]) + len(result[1::8]) + len(result[2::8]) +
-          len(result[3::8]) +len(result[4::8]) +len(result[5::8]) +
-          len(result[6::8]) +len(result[7::8]))
-    tasks = [(result[0::8],size),
-             (result[1::8],size),
-             (result[2::8],size),
-             (result[3::8],size),
-             (result[4::8],size),
-             (result[5::8],size),
-             (result[6::8],size),
-             (result[7::8],size),]
-    result_mult = pool.map(overlap_preposes, tasks)
-    result = result_mult[0] + result_mult[1] + \
-                  result_mult[2] + result_mult[3] + \
-                  result_mult[4] + result_mult[5] + \
-                  result_mult[6] + result_mult[7]
-    pool.close()
-    pool.join()
-    del result_mult
+    # result_size = len(result)//8
+    # pool = multiprocessing.Pool(processes= 1)
+    # start = len(result)
+    # print('start = ' +  str(start))
+    # print(len(result[0::8]) + len(result[1::8]) + len(result[2::8]) +
+    #       len(result[3::8]) +len(result[4::8]) +len(result[5::8]) +
+    #       len(result[6::8]) +len(result[7::8]))
+    # tasks = [(result[0::8],size),
+    #          (result[1::8],size),
+    #          (result[2::8],size),
+    #          (result[3::8],size),
+    #          (result[4::8],size),
+    #          (result[5::8],size),
+    #          (result[6::8],size),
+    #          (result[7::8],size),]
+    # result_mult = pool.map(overlap_preposes, tasks)
+    # result = result_mult[0] + result_mult[1] + \
+    #               result_mult[2] + result_mult[3] + \
+    #               result_mult[4] + result_mult[5] + \
+    #               result_mult[6] + result_mult[7]
+    # pool.close()
+    # pool.join()
+    # del result_mult
     end1 = len(result)
     print('end1 = ' + str(end1))
     result = overlap_preposes((result,size))
@@ -298,7 +298,7 @@ class Model():
         """
         # Getting the metadata corresponding to the patch pair ID
         meta_pair = self.metadata[pair_id]
-        print(meta_pair)
+        # print(meta_pair)
 
         #############################################
         #### YOUR INFERENCE ALGORITHM GOES HERE #####
@@ -312,7 +312,7 @@ class Model():
         # print(npy)
 
         xs, ys, class_id, probs = [], [], [], []
-        print(xs)
+        # print(xs)
         for num in range(len(npy)):
             x = int((npy[num][1][0]+npy[num][1][1])/2)
             y = int((npy[num][1][2]+npy[num][1][3])/2)
